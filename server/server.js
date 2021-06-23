@@ -22,7 +22,7 @@ app.get('/habit', (req, res) => {
 app.post('/habit/insert', (req, res) => {
   const name = req.body.name;
   const count = req.body.count;
-  const sqlQuery = 'INSERT INTO habit ( name, count) VALUES (?,?,?)';
+  const sqlQuery = 'INSERT INTO habit ( name, count) VALUES (?,?)';
   db.query(sqlQuery, [name, count], (err, result) => {
     res.send('success!');
     console.log(name, count);
