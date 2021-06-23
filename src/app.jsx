@@ -41,24 +41,16 @@ class App extends Component {
   };
 
   handleDelete = (habit) => {
-    // const habits = this.state.habits.filter((item) => item.id !== habit.id);
-    // this.setState({ habits });
     Axios.delete(`http://localhost:3001/habit/${habit.id}`, { id: habit.id }).then(() => {
       this.componentDidMount();
     });
   };
-
-  // handleAdd = (name) => {
-  //   const habits = [...this.state.habits, { id: Date.now(), name, count: 0 }];
-  //   this.setState({ habits });
-  // };
 
   handleAdd = (name) => {
     Axios.post('http://localhost:3001/habit/insert', {
       name,
       count: 0,
     }).then(() => {
-      alert('등록 완료!');
       this.componentDidMount();
     });
   };
@@ -86,7 +78,7 @@ class App extends Component {
 
   render() {
     return (
-      <>
+      <div className="container">
         <Navbar totalCount={this.state.habits.filter((item) => item.count > 0).length} />
         <Habits
           key={this.state.habits.id}
@@ -97,7 +89,7 @@ class App extends Component {
           onAdd={this.handleAdd}
           onReset={this.handleReset}
         />
-      </>
+      </div>
     );
   }
 }

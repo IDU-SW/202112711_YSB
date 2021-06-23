@@ -5,7 +5,7 @@ import Habit from './habit';
 class Habits extends Component {
   render() {
     return (
-      <div>
+      <div className="habitsBox">
         <HabitAddForm onAdd={this.props.onAdd} />
         <ul>
           {this.props.habits.map((habit) => (
