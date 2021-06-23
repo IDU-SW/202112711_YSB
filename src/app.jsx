@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './app.css';
 import Habits from './components/habits';
 import Navbar from './components/navbar';
+import Axios from 'axios';
 
 class App extends Component {
   state = {
@@ -34,9 +35,18 @@ class App extends Component {
     this.setState({ habits });
   };
 
+  // handleAdd = (name) => {
+  //   const habits = [...this.state.habits, { id: Date.now(), name, count: 0 }];
+  //   this.setState({ habits });
+  // };
+
   handleAdd = (name) => {
-    const habits = [...this.state.habits, { id: Date.now(), name, count: 0 }];
-    this.setState({ habits });
+    Axios.post('http://localhost:3001/habit/insert', {
+      name,
+      count: 0,
+    }).then(() => {
+      alert('등록 완료!');
+    });
   };
 
   handleReset = () => {
@@ -50,7 +60,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetch('http://localhost:3001/api')
+    fetch('http://localhost:3001/habit')
       .then((res) => res.json())
       .then((data) => this.setState({ habits: data.habits }));
   }
