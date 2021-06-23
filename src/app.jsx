@@ -12,7 +12,12 @@ class App extends Component {
   handleIncrement = (habit) => {
     const habits = this.state.habits.map((item) => {
       if (item.id === habit.id) {
-        return { ...habit, count: habit.count + 1 };
+        return Axios.post(`http://localhost:3001/habit/update/${habit.id}`, {
+          id: habit.id,
+          count: habit.count + 1,
+        }).then(() => {
+          this.componentDidMount();
+        });
       }
       return item;
     });
@@ -23,7 +28,12 @@ class App extends Component {
     const habits = this.state.habits.map((item) => {
       if (item.id === habit.id) {
         const count = habit.count - 1;
-        return { ...habit, count: count < 0 ? 0 : count };
+        return Axios.post(`http://localhost:3001/habit/update/${habit.id}`, {
+          id: habit.id,
+          count: count < 0 ? 0 : count,
+        }).then(() => {
+          this.componentDidMount();
+        });
       }
       return item;
     });
@@ -56,7 +66,12 @@ class App extends Component {
   handleReset = () => {
     const habits = this.state.habits.map((habit) => {
       if (habit.count !== 0) {
-        return { ...habit, count: 0 };
+        return Axios.post(`http://localhost:3001/habit/update/${habit.id}`, {
+          id: habit.id,
+          count: 0,
+        }).then(() => {
+          this.componentDidMount();
+        });
       }
       return habit;
     });

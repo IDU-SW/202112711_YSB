@@ -38,6 +38,16 @@ app.delete('/habit/:id', (req, res) => {
   });
 });
 
+app.post('/habit/update/:id', (req, res, count) => {
+  const updatedId = req.params.id;
+  const updatedCount = req.body.count;
+  const sqlQuery = 'UPDATE habit SET count=? WHERE id=?';
+  db.query(sqlQuery, [updatedCount, updatedId], (err, result) => {
+    res.send('update!');
+    console.log(updatedId, updatedCount);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server On : http://localhost:${PORT}/`);
 });
