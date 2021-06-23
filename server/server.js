@@ -29,6 +29,15 @@ app.post('/habit/insert', (req, res) => {
   });
 });
 
+app.delete('/habit/:id', (req, res) => {
+  const selectedId = req.params.id;
+  const sqlQuery = 'DELETE FROM habit WHERE id=?';
+  db.query(sqlQuery, [selectedId], (err, result) => {
+    res.send('delete!');
+    console.log(selectedId);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server On : http://localhost:${PORT}/`);
 });

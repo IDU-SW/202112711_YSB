@@ -31,8 +31,11 @@ class App extends Component {
   };
 
   handleDelete = (habit) => {
-    const habits = this.state.habits.filter((item) => item.id !== habit.id);
-    this.setState({ habits });
+    // const habits = this.state.habits.filter((item) => item.id !== habit.id);
+    // this.setState({ habits });
+    Axios.delete(`http://localhost:3001/habit/${habit.id}`, { id: habit.id }).then(() => {
+      this.componentDidMount();
+    });
   };
 
   // handleAdd = (name) => {
@@ -46,6 +49,7 @@ class App extends Component {
       count: 0,
     }).then(() => {
       alert('등록 완료!');
+      this.componentDidMount();
     });
   };
 
